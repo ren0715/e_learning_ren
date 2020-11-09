@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:info] = "Please log in."
-      redirect_to root_path
+      redirect_to login_url
     else
       render 'new'
     end
