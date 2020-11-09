@@ -76,3 +76,7 @@ gem 'will_paginate-bootstrap4'
 gem 'carrierwave', '1.2.2'
 
 gem 'mini_magick', '4.7.0'
+
+gem 'yaml_db'
+
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
