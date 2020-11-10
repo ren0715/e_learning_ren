@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources:users
+    resources:categories
+  end
   resources:sessions
   resources:users
   root 'pages#home'
