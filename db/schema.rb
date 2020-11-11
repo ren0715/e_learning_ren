@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(version: 2020_11_11_064036) do
   end
 
   create_table "choices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "word_id"
+    t.bigint "word_id"
     t.boolean "is_correct"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["word_id"], name: "index_choices_on_word_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -38,10 +39,13 @@ ActiveRecord::Schema.define(version: 2020_11_11_064036) do
   end
 
   create_table "words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "category_id"
+    t.bigint "category_id"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_words_on_category_id"
   end
 
+  add_foreign_key "choices", "words"
+  add_foreign_key "words", "categories"
 end
