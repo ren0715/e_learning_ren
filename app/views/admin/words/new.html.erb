@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <span>Admin | <%= @category.title %> | Words</span>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <%= link_to "Back",admin_category_words_path(@category)%>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container w-75">
+                <%= form_for @word, url:admin_category_words_path do |f| %>
+                    <%# render ''%>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <%= f.label :content %>
+                        </div>
+                        <div class="col-sm-7">
+                            <%= f.text_field :content, class: 'form-control' %>
+                        </div>
+                        
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <%= f.label :choices %>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <%= f.text_field :content , class: 'form-control' %>
+                                </div>
+                                <div class="col-sm-3">
+                                    <%= f.label :correct %>
+                                    <%= f.check_box :content, id: :samurai_checkbox,:as => :boolean%>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <%= f.text_field :content , class: 'form-control' %>
+                                </div>
+                                <div class="col-sm-3">
+                                    <%= f.label :correct %>
+                                    <%= f.check_box :content, id: :samurai_checkbox,:as => :boolean%>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <%= f.text_field :content , class: 'form-control' %>
+                                </div>
+                                <div class="col-sm-3">
+                                    <%= f.label :correct %>
+                                    <%= f.check_box :content, id: :samurai_checkbox,:as => :boolean%>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group text-center">
+                        <%= f.submit 'Save Word',class: 'btn btn-success'%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
