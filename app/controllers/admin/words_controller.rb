@@ -33,13 +33,18 @@ class Admin::WordsController < ApplicationController
 
     if @word.update_attributes(word_params)
       flash[:success] = "Word and Choices updated!"
-      redirect_to admin_category_words_url
+      redirect_to edit_admin_category_word_url
     else
       render 'edit'
     end
   end
 
   def destroy
+    @word = Word.find(params[:id])
+    if @word.destroy
+      flash[:info] = "Word deleted."
+      redirect_to request.referrer
+    end
   end
   private
     def word_params
