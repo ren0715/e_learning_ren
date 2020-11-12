@@ -28,6 +28,15 @@ class Admin::WordsController < ApplicationController
   end
 
   def update
+    @category = Category.find(params[:category_id])
+    @word = Word.find(params[:id])
+
+    if @word.update(word_params)
+      flash[:success] = "Word and Choices updated!"
+      redirect_to edit_admin_category_word_url
+    else
+      render 'edit'
+    end
   end
 
   def destroy
