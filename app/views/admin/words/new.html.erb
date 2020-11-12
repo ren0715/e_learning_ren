@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="container w-75">
                 <%= form_for ([:admin, @category, @word]) do |f| %>
-                    <%# render ''%>
+                    <%= render 'error'%>
                     <div class="form-group row">
                         <div class="col-sm-3">
                             <%= f.label :content %>
@@ -30,10 +30,12 @@
                         <div class="col-sm-9">
                             <%= f.fields_for :choices do |choice| %>
                                 <div class="form-group row">
-                                    <div class="col-sm-9"><%= choice.text_field :content, class: 'form-control' %></div>
+                                    <div class="col-sm-9">
+                                        <%= choice.text_field :content, class: 'form-control' %>
+                                    </div>
                                     <div class="col-sm-3">
-                                    <%= choice.label :correct %>
-                                    <%= choice.check_box :is_correct, checked: false %>
+                                        <%= choice.label :correct %>
+                                        <%= choice.check_box :is_correct, checked: false %>
                                     </div>
                                 </div>
                             <% end %>

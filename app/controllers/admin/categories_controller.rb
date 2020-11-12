@@ -13,7 +13,7 @@ class Admin::CategoriesController < ApplicationController
       flash[:success] = "category created!"
       redirect_to admin_categories_url
     else
-      render 'admin/new' 
+      render 'new' 
     end
   end
 
