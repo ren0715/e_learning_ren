@@ -1,0 +1,35 @@
+<%= form_for ([:admin, @category, @word]) do |f| %>
+    <%= render 'error'%>
+    <div class="form-group row">
+        <div class="col-sm-3">
+            <%= f.label :content %>
+        </div>
+        <div class="col-sm-7">
+            <%= f.text_field :content, class: 'form-control' %>
+        </div>
+        
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-3">
+            <%= f.label :choices %>
+        </div>
+        <div class="col-sm-9">
+            <%= f.fields_for :choices do |choice| %>
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        <%= choice.text_field :content, class: 'form-control' %>
+                    </div>
+                    <div class="col-sm-3">
+                        <%= choice.label :correct %>
+                        <%= choice.check_box :is_correct %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
+    </div>
+
+    <div class="form-group text-center">
+        <%= f.submit 'Save Word',class: 'btn btn-success'%>
+    </div>
+<% end %>
