@@ -32,7 +32,7 @@ class Admin::WordsController < ApplicationController
     @word = Word.find(params[:id])
 
     if @word.update(word_params)
-      flash[:success] = "Word and Choices updated!"
+      flash[:success] = "Words and Choices updated!"
       redirect_to edit_admin_category_word_url
     else
       render 'edit'
