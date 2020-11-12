@@ -1,7 +1,7 @@
 class Admin::WordsController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
-
+    @words = Word.where(category_id: params[:category_id])
   end
 
   def new
@@ -11,6 +11,15 @@ class Admin::WordsController < ApplicationController
   end
 
   def create
+    @category = Category.find(params[:category_id])
+    @word = @category.words.new(word_params)
+
+    if @word.save
+      flash[:success] = "Word and Choices created!"
+      redirect_to new_admin_category_word_url
+    else
+      render 'new' 
+    end
   end
 
   def edit
@@ -21,4 +30,8 @@ class Admin::WordsController < ApplicationController
 
   def destroy
   end
+  private
+    def word_params
+      params.require(:word).permit(:content, choices_attributes: [:content, :is_correct])
+    end
 end
