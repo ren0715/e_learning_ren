@@ -10,7 +10,7 @@ class Word < ApplicationRecord
 
   # validates choices: :content,uniqueness: { case_sensitive: false}
     def only_one_is_checked
-      if choices.select{ |choice| choice.is_correct == "true" }.count !=1
+      if choices.select{ |choice| choice.is_correct == true }.count !=1
         return errors.add :base, "Must have one correct choice"
       end
     end

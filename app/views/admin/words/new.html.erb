@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="container w-75">
                 <%= form_for ([:admin, @category, @word]) do |f| %>
-                    <% render 'error'%>
+                    <%= render 'error'%>
                     <div class="form-group row">
                         <div class="col-sm-3">
                             <%= f.label :content %>

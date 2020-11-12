@@ -26,7 +26,7 @@
                 <% @words.each do |word|%>
                 <tr>
                     <td><%= word.content %></td>
-                    <td><%= word.choices.find_by(is_correct: "true") %></td>
+                    <td><%= word.choices.find_by(is_correct: true).content %></td>
                     <td>
                         <%= link_to "Edit", "#" , class: "btn btn-sm btn-warning"%>
                         <%= link_to "Remove", "#", class: "btn btn-sm btn-danger"%>

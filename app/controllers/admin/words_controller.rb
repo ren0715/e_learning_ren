@@ -16,7 +16,7 @@ class Admin::WordsController < ApplicationController
 
     if @word.save
       flash[:success] = "Word and Choices created!"
-      redirect_to new_admin_category_word_url
+      redirect_to admin_category_words_url
     else
       render 'new' 
     end
