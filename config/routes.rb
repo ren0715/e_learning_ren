@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     end
   end
   resources:sessions
-  resources:users
+  resources:users do
+    get 'dashboard'
+  end
   root 'pages#home'
   get '/login', to: 'sessions#new'
   delete '/logout', to: 'sessions#destroy'
