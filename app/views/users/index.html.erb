@@ -1,2 +1,27 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="container">
+    <h1 class="text-center">Users</h1>
+    <hr>
+
+    
+    
+    <div class="row">
+        <% @users.each do |user|%>
+            <div class="col-md-6">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <div class="media">
+                            <%= image_tag user.avatar.url, class: 'rounded-circle',style: 'width: 90px;'%>
+                            <div class="media-body pt-4">
+                                <strong class="h3 pl-3"><%= link_to user.name, "#"%></strong>
+                                <div class="float-right"><%= link_to "Follow", "#",class: "btn btn-warning text-white"%></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%end%>
+    </div>
+    <div class="paginate text-center">
+        <%= will_paginate @users%>
+    </div>
+</div>
