@@ -21,6 +21,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     
   end
+
   def update
     @category = Category.find(params[:id])
 
@@ -29,6 +30,15 @@ class Admin::CategoriesController < ApplicationController
       redirect_to admin_categories_url
     else
       render 'edit'
+    end
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+
+    if @category.destroy
+      flash[:info] = "Category deleted."
+      redirect_to request.referrer
     end
   end
 
