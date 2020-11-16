@@ -20,8 +20,10 @@
                         <%= choice.text_field :content, class: 'form-control' %>
                     </div>
                     <div class="col-sm-3">
-                        <%= label_tag :correct %>
+                        <%= choice.label :is_correct do %>
+                        Correct
                         <%= choice.check_box :is_correct %>
+                        <% end %>
                     </div>
                 </div>
             <% end %>
