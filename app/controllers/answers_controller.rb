@@ -3,7 +3,17 @@ class AnswersController < ApplicationController
     @lesson = Lesson.find(params[:lesson_id])
 
     if @lesson.next_word.nil?
-      redirect_to @lesson
+      @answers = @lesson.answers.all
+      @result = 0
+      @answers.each do |answer|
+        if answer.choice.is_correct
+          @result +=1
+        end
+      end
+      if @lesson.update(result:@result)
+        redirect_to @lesson
+      end
+      
     else
       @answer = Answer.new
       @category = @lesson.category

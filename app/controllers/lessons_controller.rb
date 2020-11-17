@@ -13,13 +13,7 @@ class LessonsController < ApplicationController
     @answers = @lesson.answers.all
     @category = @lesson.category
     @words = @category.words
-    @result = 0
-    @answers.each do |answer|
-      if answer.choice.is_correct
-        @result +=1
-      end
-    end
-    @lesson.update(result:@result)
+    
 
   end
 
