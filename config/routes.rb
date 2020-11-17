@@ -2,15 +2,19 @@ Rails.application.routes.draw do
   
   
   namespace :admin do
-    resources:users
-    resources:categories do
-      resources:words
+    resources :users
+    resources :categories do
+      resources :words
     end
   end
-  resources:answers
-  resources:categories
-  resources:sessions
-  resources:users do
+  
+  resources :categories
+  
+  resources :lessons do
+    resources :answers
+  end
+  resources :sessions
+  resources :users do
     get 'dashboard'
   end
   root 'pages#home'
