@@ -9,7 +9,18 @@ class LessonsController < ApplicationController
 
 
   def show
-    
+    @lesson = Lesson.find(params[:id])
+    @answers = @lesson.answers.all
+    @category = @lesson.category
+    @words = @category.words
+    @result = 0
+    @answers.each do |answer|
+      if answer.choice.is_correct
+        @result +=1
+      end
+    end
+    @lesson.update(result:@result)
+
   end
 
 end

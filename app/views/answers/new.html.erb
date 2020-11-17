@@ -13,8 +13,9 @@
         <div class="card-body text-center">
             <h2 class="text-warning mb-5"><%= @word.content %></h2>
 
-            <%= form_for([:lesson, @answer]) do |f|%>
-                <% @choices.each do |choice| %>
+            
+            <% @choices.each do |choice| %>
+                <%= form_for([:lesson, @answer]) do |f|%>
                     <div class="form-group row">
                         <div class="container">
                             <%= f.hidden_field :choice_id, value: choice.id%>
