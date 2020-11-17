@@ -9,7 +9,12 @@ class LessonsController < ApplicationController
 
 
   def show
+    @lesson = Lesson.find(params[:id])
+    @answers = @lesson.answers.all
+    @category = @lesson.category
+    @words = @category.words
     
+
   end
 
 end

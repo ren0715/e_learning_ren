@@ -1,2 +1,35 @@
-<h1>Lessons#show</h1>
-<p>Find me in app/views/lessons/show.html.erb</p>
+<div class="container w-50">
+    <div class="row my-4">
+        <div class="col-sm-6">
+            <h1><%= @category.title %></h1>
+        </div>
+        <div class="col-sm-6 text-right">
+            <h2>Result: <span class="text-warning"><%= @lesson.result%></span> of <%=@category.words.count%></h2>
+        </div>
+    </div>
+    
+    
+    <table class="table">
+        <tr>
+            <th>Word</th>
+            <th>Your Answer</th>
+            <th colspan="2">Correct Answer</th>
+        </tr>
+        <% @words.each do |word| %>
+            <tr>
+                <td><%= word.content %></td>
+                <td><%= word.choices.find_by(id: @answers.find_by(word_id: word.id).choice_id).content %></td>
+                <td><%= word.choices.find_by(is_correct: true).content %></td>
+                <td>
+                    <% if word.choices.find_by(id: @answers.find_by(word_id: word.id).choice_id).content == word.choices.find_by(is_correct: true).content%>
+                        <i class="fa fa-check text-success"></i>
+                    <%else%>
+                        <i class="fa fa-times text-danger"></i>
+                    <%end%>
+                
+                </td>
+            </tr>
+        <%end%>
+        
+    </table>
+</div>
