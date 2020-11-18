@@ -12,4 +12,5 @@ class Lesson < ApplicationRecord
   def next_word
     (category.words - words).first
   end
+
 end

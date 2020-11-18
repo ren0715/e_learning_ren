@@ -33,10 +33,15 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @lessons = @user.lessons.all
+    @howmany = 0
   end
 
   def dashboard
-    
+    @user = current_user
+    @lessons = current_user.lessons.all
+    @howmany = 0
   end
 
   private
