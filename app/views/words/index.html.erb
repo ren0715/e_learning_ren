@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <%=render 'users/user_info'%>
+        </div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Words Learned</h4>
+                </div>
+                <div class="card-body">
+                    
+                    <table class="table">
+                        <tr>
+                            <th>Word</th>
+                            <th>Your Answer</th>
+                            <th colspan="2">Correct Answer</th>
+                        </tr>
+                        <% @lessons.each do |lesson| %>
+                            <% lesson.words.each do |word| %>
+                                <tr>
+                                    <td><%= word.content %></td>
+                                    <td><%= word.choices.find_by(id: lesson.answers.find_by(word_id: word.id).choice_id).content %></td>
+                                    <td><%= word.choices.find_by(is_correct: true).content %></td>
+                                    <td>
+                                        <% if word.choices.find_by(id: lesson.answers.find_by(word_id: word.id).choice_id).content == word.choices.find_by(is_correct: true).content%>
+                                            <i class="fa fa-check text-success"></i>
+                                        <%else%>
+                                            <i class="fa fa-times text-danger"></i>
+                                        <%end%>
+                                    
+                                    </td>
+                                </tr>
+                            <%end%>
+                            
+                        <%end%>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

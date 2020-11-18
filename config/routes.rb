@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  resources :words
   namespace :admin do
     resources :users
     resources :categories do
