@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    @user = current_user
     @lessons = current_user.lessons.all
     @howmany = 0
   end
