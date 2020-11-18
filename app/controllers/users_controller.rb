@@ -33,10 +33,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @lessons = current_user.lessons.all
+    @howmany = 0
   end
 
   def dashboard
-    
+    @lessons = current_user.lessons.all
+    @howmany = 0
   end
 
   private
