@@ -14,8 +14,8 @@
         <div class="mb-15"><%= current_user.email%></div>
 
         <div class="mt-3">
-            <%= link_to "View Profile", "#" , class: "btn btn-sm btn-warning text-white"%>
-            <%= link_to "Update Profile", "#" , class: "btn btn-sm btn-info text-white"%>
+            <%= link_to "View Profile", user_path(current_user) , class: "btn btn-sm btn-warning text-white"%>
+            <%= link_to "Update Profile", edit_user_path(current_user) , class: "btn btn-sm btn-info text-white"%>
         </div>
     </div>
 </div>

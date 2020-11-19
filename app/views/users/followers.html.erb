@@ -1,35 +1,38 @@
 <div class="container">
-    <h1 class="text-center">Users</h1>
-    <hr>
-
-    
-    
     <div class="row">
-        <% @users.each do |user|%>
-            <div class="col-md-6">
-                <div class="card my-3">
-                    <div class="card-body">
-                        <div class="media">
+        <div class="col-sm-4">
+            <%=render 'user_info'%>
+        </div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Followers</h4>
+                </div>
+                <div class="card-body">
+                    <% @users.each do |user| %>
+                        <div class="media mb-4 border-bottom pb-3">
                             <% if user.avatar? %>
                                 <%= image_tag user.avatar.url, class: 'rounded-circle',style: 'width: 90px;'%>
                             <%else%>
                                 <%= image_tag "/assets/11.svg", class: '',style: 'width: 90px; height: 90px;'%>
                             <%end%>
                             <div class="media-body pt-4">
-                                <span class="h5 pl-3"><%= link_to user.name, user_path(user)%></span>
+                                <span class="h5 pl-3"><%= link_to user.name,user_path(user)%></span>
                                 <div class="float-right">
-                                    <% if user!=current_user%>
+                                    <% if @user==current_user%>
                                         <%=render 'follow_button',user: user%>
                                     <%end%>
                                 </div>
+                                
                             </div>
+                            
                         </div>
+                    <% end %>
+                    <div class="paginate text-center">
+                        <%= will_paginate @users%>
                     </div>
                 </div>
             </div>
-        <%end%>
-    </div>
-    <div class="paginate text-center">
-        <%= will_paginate @users%>
+        </div>
     </div>
 </div>
