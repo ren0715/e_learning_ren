@@ -14,4 +14,35 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
   has_many :lessons, dependent: :destroy
+
+  def follow(other_user)
+    Relationship.create(
+      follower_id: id,            #current_user.id
+      followed_id: other_user.id  #@user.id
+    )
+  end
+
+  def active_relationships
+    Relationship.where(follower_id: id)
+  end
+
+
+  def relationship(other_user)
+    active_relationships.find_by(followed_id: other_user.id)
+  end
+
+  def passive_relationships
+    Relationship.where(followed_id: id)
+  end
+
+  def followers
+    ids = passive_relationships.pluck(:follower_id)
+    User.where(id: ids)
+  end
+
+  def following
+    ids = active_relationships.pluck(:followed_id)
+    User.where(id: ids)
+  end
+  
 end

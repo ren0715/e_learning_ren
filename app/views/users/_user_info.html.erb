@@ -11,12 +11,21 @@
         </div>
 
         <h3 class="mb-0"><%= @user.name%></h3>
-        <div class="mb-15"><%= @user.email%></div>
-
-        <div class="mt-3">
-            <%= link_to "View Profile", user_path(@user) , class: "btn btn-sm btn-warning text-white"%>
-            <%= link_to "Update Profile", edit_user_path(@user) , class: "btn btn-sm btn-info text-white"%>
-        </div>
+        <div class="mb-3"><%= @user.email%></div>
+        <% if @user!=current_user%>
+            <% if current_user.relationship(@user) %>
+                <%= button_to 'Unfollow',relationship_path(@user),
+                    params: {followed_id: @user.id},
+                    method: :delete,
+                    class:"btn btn-danger"
+                %>
+            <%else%>
+                <%= button_to 'Follow',relationships_path,
+                    params: {followed_id: @user.id},
+                    class:"btn btn-primary" 
+                %>
+            <%end%>
+        <%end%>
     </div>
 </div>
 
@@ -24,11 +33,11 @@
     <div class="card-body">
         <div class="text-center">
             <div class="d-inline-block mr-4">
-                <%= link_to @user.active_relationships.count, following_user_path(@user)%>
+                <%= link_to @user.active_relationships.count, following_user_path%>
                 <span>following</span>
             </div>
             <div class="d-inline-block">
-                <%= link_to @user.passive_relationships.count, followers_user_path(@user)%>
+                <%= link_to @user.passive_relationships.count, followers_user_path%>
                 <span>followers</span>
             </div>
         </div>

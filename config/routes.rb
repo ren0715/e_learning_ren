@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  
+  resources :relationships
   resources :words
   namespace :admin do
     resources :users
@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users do
     get 'dashboard'
+    member do
+      get 'following'
+      get 'followers' 
+    end
   end
   root 'pages#home'
   get 'categories/index'
