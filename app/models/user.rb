@@ -45,4 +45,9 @@ class User < ApplicationRecord
     User.where(id: ids)
   end
   
+  def feed
+    ids = following.pluck(:id)
+    ids << id      #append | add the user_id to the array
+    Activity.where(user_id: ids)
+  end
 end

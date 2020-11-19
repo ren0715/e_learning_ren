@@ -4,7 +4,7 @@ class Lesson < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :words, through: :answers
   has_many :choices, through: :answers
-
+  has_one :activity, as: :action, dependent: :destroy
   def correct_answers
     choices.where(is_correct: true).count
   end

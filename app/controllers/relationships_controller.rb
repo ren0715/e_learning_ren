@@ -3,6 +3,8 @@ class RelationshipsController < ApplicationController
     other_user = User.find(params[:followed_id])
 
     current_user.follow(other_user)
+    @relationship = current_user.relationship(other_user)
+    @relationship.create_activity(user: current_user)
     flash[:success] = "Relationship created!"
     redirect_to request.referrer
   end

@@ -33,15 +33,19 @@ class UsersController < ApplicationController
   end
 
   def show
+    @users = User.all
     @user = User.find(params[:id])
     @lessons = @user.lessons.all
     @howmany = 0
+    @activities = Activity.where(user_id: @user.id).paginate(page: params[:page], per_page: 10)
   end
 
   def dashboard
+    @users = User.all
     @user = current_user
     @lessons = current_user.lessons.all
     @howmany = 0
+    @activities = @user.feed.paginate(page: params[:page], per_page: 10)
   end
 
   def following
