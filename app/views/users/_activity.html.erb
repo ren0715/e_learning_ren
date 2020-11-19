@@ -1,0 +1,35 @@
+<% @activities.each do |activity|%>
+    <div class="media mb-4">
+        <div class="avatarsquare">
+            <div class="default">
+                <% if activity.user.avatar? %>
+                    <%= image_tag activity.user.avatar.url, class: 'w-50'%>
+                <%else%>
+                    <%= image_tag "/assets/11.svg", class: '',style: 'width: 50px; height: 50px;'%>
+                <%end%>
+            </div>
+        </div>
+        <div class="media-body ml-2">
+            <strong>
+                <% if activity.user == current_user %>
+                    <%=link_to "You",user_path(activity.user),class: "text-muted"%>
+                <% else %>
+                    <%=link_to activity.user.name,user_path(activity.user),class: "text-muted"%>
+                <% end %>
+            </strong>
+            <span>
+                <% if activity.action_type == "Relationship" %>
+                    followed
+                    <%=link_to @users.find_by(id:activity.action_id).name,user_path(@users.find_by(id:activity.action_id)),class: "badge badge-secondary"%>
+                <% else %>
+                    learned <%=activity.action.result%> of <%=activity.action.choices.count%>
+                    <%=link_to activity.action.category.title,lesson_path(activity.action),class: "badge badge-primary"%>
+                <% end %>
+            </span>
+
+            <div>
+                <small class="text-muted"><%= time_ago_in_words(activity.created_at) %></small>
+            </div>
+        </div>
+    </div>
+<% end %>
