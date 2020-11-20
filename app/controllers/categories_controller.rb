@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    
+    @page = params[:learned]
     @ids = current_user.lessons.pluck(:category_id)
     if params[:learned].eql?("learned")
       @categories = Category.where(id: @ids).paginate(page: params[:page], per_page: 10)
