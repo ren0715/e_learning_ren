@@ -18,14 +18,4 @@ class Admin::UsersController < ApplicationController
       redirect_to request.referrer
     end
   end
-
-
-  private
-    def add_params
-      params.require(:user).permit(is_admin: true)
-    end
-
-    def remove_params
-      params.require(:user).permit(is_admin: false)
-    end
 end
