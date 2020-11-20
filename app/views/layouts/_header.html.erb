@@ -25,10 +25,11 @@
                         <%= link_to "Settings",edit_user_path(current_user), class: "dropdown-item" %>
                         <%= link_to "Logout", logout_path, method: :delete, class: "dropdown-item" %>
 
-
-                        <div class="dropdown-divider"></div>
-                        <%= link_to "Manage Categories",admin_categories_path, class: "dropdown-item" %>
-
+                        <% if current_user.is_admin? %>
+                            <div class="dropdown-divider"></div>
+                            <%= link_to "Manage Categories",admin_categories_path, class: "dropdown-item" %>
+                            <%= link_to "User Management",admin_users_path, class: "dropdown-item" %>
+                        <% end %>
 
                     </div>
                 </li>
