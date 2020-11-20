@@ -1,0 +1,46 @@
+<div class="container">
+    <h1 class="text-center">User Management</h1>
+    <hr>
+
+    
+    
+    <div class="row">
+        <% @users.each do |user|%>
+            <div class="col-md-6">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <div class="media">
+                            <% if user.avatar? %>
+                                <%= image_tag user.avatar.url, class: 'rounded-circle',style: 'width: 90px;'%>
+                            <%else%>
+                                <%= image_tag "/assets/11.svg", class: '',style: 'width: 90px; height: 90px;'%>
+                            <%end%>
+                            <div class="media-body pt-4">
+                                <span class="h5 pl-3"><%= link_to user.name, user_path(user)%></span>
+                                <div class="float-right">
+                                    <% if user!=current_user%>
+                                        <% if user.is_admin? %>
+                                            <%= button_to 'Remove as Admin',admin_user_path(user),
+                                                params: {followed_id: user.id},
+                                                method: :delete,
+                                                class:"btn btn-danger"
+                                            %>
+                                        <%else%>
+                                            <%= button_to 'Add as Admin',admin_users_path,
+                                                params: {followed_id: user.id},
+                                                class:"btn btn-primary" 
+                                            %>
+                                        <%end%>
+                                    <%end%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%end%>
+    </div>
+    <div class="paginate text-center">
+        <%= will_paginate @users%>
+    </div>
+</div>
