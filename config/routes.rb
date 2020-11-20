@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   resources :relationships
   resources :words
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        patch 'add'
+        patch 'remove'
+      end
+    end
     resources :categories do
       resources :words
     end
