@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_action :login
+
   def new
     @lesson = Lesson.find(params[:lesson_id])
 
@@ -30,5 +32,12 @@ class AnswersController < ApplicationController
   private
   def answer_params
     params.require(:answer).permit(:lesson_id, :word_id, :choice_id)
+  end
+
+  def login
+    if !current_user
+      flash[:danger] = "You must be logged in to access this section."
+      redirect_to login_url
+    end
   end
 end

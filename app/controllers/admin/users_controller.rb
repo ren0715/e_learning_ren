@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :admin
   def index
     @users = User.paginate(page: params[:page], per_page: 10)
   end
@@ -16,6 +17,14 @@ class Admin::UsersController < ApplicationController
     if @user.update(is_admin: false)
       flash[:success] = "Removed as Admin."
       redirect_to request.referrer
+    end
+  end
+
+  private
+  def admin
+    if !current_user.is_admin?
+      flash[:danger] = "You can't access admin pages."
+      redirect_to user_dashboard_url(current_user)
     end
   end
 end

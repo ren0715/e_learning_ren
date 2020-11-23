@@ -1,4 +1,6 @@
 class LessonsController < ApplicationController
+  before_action :login
+  
   def create
     @category = Category.find(params[:category_id])
     @lesson = current_user.lessons.new(category_id:@category.id)
@@ -17,4 +19,11 @@ class LessonsController < ApplicationController
 
   end
 
+  private
+  def login
+    if !current_user
+      flash[:danger] = "You must be logged in to access this section."
+      redirect_to login_url
+    end
+  end
 end

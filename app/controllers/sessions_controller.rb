@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :login, only: [:new, :create],raise: false
   def new
   end
 
@@ -22,5 +23,13 @@ class SessionsController < ApplicationController
     log_out @user
     flash[:info] = "Successfully logged out."
     redirect_to root_url
+  end
+
+  private
+  def login
+    if !current_user
+      flash[:danger] = "You must be logged in to access this section."
+      redirect_to login_url
+    end
   end
 end
