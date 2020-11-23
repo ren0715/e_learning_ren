@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :login, only: [:new, :create],raise: false
+
   def index
     @users = User.paginate(page: params[:page], per_page: 10)
   end
@@ -62,7 +64,7 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :avatar, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :avatar, :password, :password_confirmation)
+  end
 end

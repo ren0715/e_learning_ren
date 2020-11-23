@@ -45,14 +45,14 @@ class Admin::CategoriesController < ApplicationController
 
   
   private
-    def admin
-      if !current_user.is_admin?
-        flash[:danger] = "You can't access admin pages."
-        redirect_to user_dashboard_url(current_user)
-      end
+  def admin
+    if !current_user.is_admin?
+      flash[:danger] = "You can't access admin pages."
+      redirect_to user_dashboard_url(current_user)
     end
+  end
 
-    def category_params
-      params.require(:category).permit(:title, :description)
-    end
+  def category_params
+    params.require(:category).permit(:title, :description)
+  end
 end

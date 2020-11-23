@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+
   def new
     @lesson = Lesson.find(params[:lesson_id])
 
@@ -31,4 +32,5 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:lesson_id, :word_id, :choice_id)
   end
+
 end

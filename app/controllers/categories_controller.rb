@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+
   def index
     @page = params[:learned]
     @ids = current_user.lessons.pluck(:category_id)
@@ -10,4 +11,5 @@ class CategoriesController < ApplicationController
       @categories = Category.all.paginate(page: params[:page], per_page: 10)
     end
   end
+  
 end
