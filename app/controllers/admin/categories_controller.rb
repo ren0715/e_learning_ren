@@ -1,4 +1,5 @@
 class Admin::CategoriesController < ApplicationController
+  before_action :admin
 
   def index
     @categories = Category.all.paginate(page: params[:page], per_page: 4)
@@ -42,8 +43,7 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  before_action :admin
-
+  
   private
     def admin
       if !current_user.is_admin?

@@ -1,4 +1,6 @@
 class Admin::WordsController < ApplicationController
+  before_action :admin
+  
   def index
     @category = Category.find(params[:category_id])
     @words = Word.where(category_id: params[:category_id]).paginate(page: params[:page], per_page: 4)
@@ -47,8 +49,7 @@ class Admin::WordsController < ApplicationController
     end
   end
 
-  before_action :admin
-
+  
   private
     def admin
       if !current_user.is_admin?
