@@ -1,6 +1,5 @@
 class WordsController < ApplicationController
-  before_action :login
-  
+
   def index
     @cate = params[:cate]
     @category = Category.find_by(title: params[:cate])
@@ -14,13 +13,5 @@ class WordsController < ApplicationController
     @categories = Category.all
     # @words = @categories.words
     
-  end
-
-  private
-  def login
-    if !current_user
-      flash[:danger] = "You must be logged in to access this section."
-      redirect_to login_url
-    end
   end
 end
