@@ -1,4 +1,5 @@
 class Admin::CategoriesController < ApplicationController
+  before_action :admin
 
   def index
     @categories = Category.all.paginate(page: params[:page], per_page: 4)
@@ -42,8 +43,16 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
+  
   private
-  def category_params
-    params.require(:category).permit(:title, :description)
-  end
+    def admin
+      if !current_user.is_admin?
+        flash[:danger] = "You can't access admin pages."
+        redirect_to user_dashboard_url(current_user)
+      end
+    end
+
+    def category_params
+      params.require(:category).permit(:title, :description)
+    end
 end

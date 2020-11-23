@@ -9,22 +9,22 @@
                     <h4>Words Learned</h4>
                 </div>
                 <div class="card-body">
-                    <span>Category:</span>
                     <span class="dropdown">
                         <button class="btn btn-bordered dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select Category
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><%= link_to "All Learned",words_path ,class: "btn btn-outline-secondary w-100"%></li>
+                            <li><%= link_to "All Learned",words_path ,class: "dropdown-item w-100 "%></li>
                             <% @categories.each do |category|%>
-                                <li><%= link_to category.title,words_path(cate: category.title) ,class: "btn btn-outline-secondary w-100"%></li>
+                                <li><%= link_to category.title,words_path(cate: category.title) ,class: "dropdown-item w-100"%></li>
                             <%end%>
                         </div>
                     </span>
+                    
                     <%if !@cate %>
-                        <strong class="float-right h3">All Categories</strong>
+                        <strong class="float-right h3"><span class="lead">Category: </span>All Categories</strong>
                     <%else%>
-                        <strong class="float-right h3"><%= @cate %></strong>
+                        <strong class="float-right h3"><span class="lead">Category: </span><%= @cate %></strong>
                     <%end%>
                     <table class="table">
                         <tr>
