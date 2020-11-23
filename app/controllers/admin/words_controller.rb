@@ -46,7 +46,17 @@ class Admin::WordsController < ApplicationController
       redirect_to request.referrer
     end
   end
+
+  before_action :admin
+
   private
+    def admin
+      if !current_user.is_admin?
+        flash[:danger] = "You can't access admin pages."
+        redirect_to user_dashboard_url(current_user)
+      end
+    end
+
     def word_params
       params.require(:word).permit(:content, choices_attributes: [:id, :content, :is_correct])
     end
