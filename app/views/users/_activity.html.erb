@@ -33,20 +33,21 @@
                 </div>
             </div>
             
+            <% if activity.user != current_user %>
+                <div class="col-2 text-right">
+                    <% if activity.votes.find_by(user_id: current_user.id) %>
+                        <%= link_to downvote_activity_path(activity), method: :delete do %>
+                            <%= fa_icon 'heart',class: "text-danger"%>
+                        <% end %>
+                    <% else %>
+                        <%= link_to upvote_activity_path(activity), method: :post do %>
+                            <%= fa_icon 'heart',class: "text-secondary"%>
+                        <% end %>
+                    <% end %>
 
-            <div class="col-2">
-                <% if activity.votes.find_by(user_id: current_user.id) %>
-                    <%= link_to downvote_activity_path(activity), method: :delete do %>
-                        <%= fa_icon 'heart',class: "text-danger"%>
-                    <%end%>
-                <%else%>
-                    <%= link_to upvote_activity_path(activity), method: :post do %>
-                        <%= fa_icon 'heart',class: "text-secondary"%>
-                    <%end%>
-                <%end%>
-
-                <%= activity.votes.count%>
-            </div>
+                    <%= activity.votes.count%>
+                </div>
+            <% end %>
             
         </div>
     </div>
