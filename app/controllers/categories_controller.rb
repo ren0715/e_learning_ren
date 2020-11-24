@@ -1,7 +1,6 @@
 class CategoriesController < ApplicationController
 
   def index
-    @lessons = Lesson.all
     @page = params[:learned]
     @ids = current_user.lessons.pluck(:category_id)
     if params[:learned].eql?("learned")

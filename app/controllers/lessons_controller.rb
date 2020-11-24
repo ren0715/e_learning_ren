@@ -22,7 +22,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
     @newlesson = current_user.lessons.new(category_id:@lesson.category_id)
     if @lesson.destroy
-      flash[:info] = "Deleted the lesson."
+      flash[:info] = "Restarted the lesson."
       
       @newlesson.save
       redirect_to new_lesson_answer_url(@newlesson)
