@@ -9,27 +9,46 @@
                 <%end%>
             </div>
         </div>
-        <div class="media-body ml-2">
-            <strong>
-                <% if activity.user == current_user %>
-                    <%=link_to "You",user_path(activity.user),class: "text-muted"%>
-                <% else %>
-                    <%=link_to activity.user.name,user_path(activity.user),class: "text-muted"%>
-                <% end %>
-            </strong>
-            <span>
-                <% if activity.action_type == "Relationship" %>
-                    followed
-                    <%=link_to @users.find_by(id:activity.action_id).name,user_path(@users.find_by(id:activity.action_id)),class: "badge badge-secondary"%>
-                <% else %>
-                    learned <%=activity.action.result%> of <%=activity.action.choices.count%>
-                    <%=link_to activity.action.category.title,lesson_path(activity.action),class: "badge badge-primary"%>
-                <% end %>
-            </span>
+        <div class="media-body ml-2 row">
+            <div class="col-10">
+                <strong>
+                    <% if activity.user == current_user %>
+                        <%=link_to "You",user_path(activity.user),class: "text-muted"%>
+                    <% else %>
+                        <%=link_to activity.user.name,user_path(activity.user),class: "text-muted"%>
+                    <% end %>
+                </strong>
+                <span>
+                    <% if activity.action_type == "Relationship" %>
+                        followed
+                        <%=link_to @users.find_by(id: activity.action.followed_id).name,user_path(@users.find_by(id: activity.action.followed_id)),class: "badge badge-secondary"%>
+                    <% else %>
+                        learned <%=activity.action.result%> of <%=activity.action.choices.count%>
+                        <%=link_to activity.action.category.title,lesson_path(activity.action),class: "badge badge-primary"%>
+                    <% end %>
+                </span>
 
-            <div>
-                <small class="text-muted"><%= time_ago_in_words(activity.created_at) %></small>
+                <div>
+                    <small class="text-muted"><%= time_ago_in_words(activity.created_at) %></small>
+                </div>
             </div>
+            
+            <% if activity.user != current_user %>
+                <div class="col-2 text-right">
+                    <% if activity.votes.find_by(user_id: current_user.id) %>
+                        <%= link_to downvote_activity_path(activity), method: :delete do %>
+                            <%= fa_icon 'heart',class: "text-danger"%>
+                        <% end %>
+                    <% else %>
+                        <%= link_to upvote_activity_path(activity), method: :post do %>
+                            <%= fa_icon 'heart',class: "text-secondary"%>
+                        <% end %>
+                    <% end %>
+
+                    <%= activity.votes.count%>
+                </div>
+            <% end %>
+            
         </div>
     </div>
 <% end %>
