@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     @activities = @user.feed.paginate(page: params[:page], per_page: 10)
   end
 
+
   def following
     @user = User.find(params[:id])
     @lessons = @user.lessons
@@ -63,6 +64,7 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page], per_page: 5)
   end
 
+  
   private
   def user_params
     params.require(:user).permit(:name, :email, :avatar, :password, :password_confirmation)

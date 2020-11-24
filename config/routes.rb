@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  
+  resources :activities do
+    member do
+      post 'upvote'
+      delete 'downvote'
+    end
+  end
   namespace :admin do
     get 'users/index'
   end
