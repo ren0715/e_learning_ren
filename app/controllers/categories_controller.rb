@@ -5,27 +5,15 @@ class CategoriesController < ApplicationController
     @ids = current_user.lessons.pluck(:category_id)
     if params[:learned].eql?("learned")
       @categories = Category.where(id: @ids).paginate(page: params[:page], per_page: 10)
-      @count = 0
-      @categories.each do |category|
-        if category.words.count != 0
-          @count +=1
-        end
-      end
     elsif params[:learned].eql?("notlearned")
       @categories = Category.where.not(id: @ids).paginate(page: params[:page], per_page: 10)
-      @count = 0
-      @categories.each do |category|
-        if category.words.count != 0
-          @count +=1
-        end
-      end
     else
       @categories = Category.all.paginate(page: params[:page], per_page: 10)
-      @count = 0
-      @categories.each do |category|
-        if category.words.count != 0
-          @count +=1
-        end
+    end
+    @count = 0
+    @categories.each do |category|
+      if category.words.count != 0
+        @count +=1
       end
     end
   end
