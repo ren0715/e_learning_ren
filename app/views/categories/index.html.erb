@@ -10,14 +10,14 @@
             <%=link_to "Not Learned", categories_path(learned: "notlearned"), class: "nav-link #{'active' if @page.eql?('notlearned')}"%>
         </li>
     </ul>
-    <h1 class="">Categories(<%=@count%>)</h1>
+    <h1 class="">Categories(<%=@categories.count%>)</h1>
     <hr>
 
     
     
     <div class="row">
         <% @categories.each do |category|%>
-            <% if category.words.count != 0 %>
+            <%# if category.words.count != 0 %>
                 <div class="col-md-6">
                     <div class="card my-3">
                         <div class="card-body">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-            <% end %>
+            <%# end %>
         <%end%>
     </div>
     <div class="paginate text-center">
