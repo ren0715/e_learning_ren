@@ -21,7 +21,7 @@
                 <span>
                     <% if activity.action_type == "Relationship" %>
                         followed
-                        <%=link_to @users.find_by(id:activity.action_id).name,user_path(@users.find_by(id:activity.action_id)),class: "badge badge-secondary"%>
+                        <%=link_to @users.find_by(id: activity.action.followed_id).name,user_path(@users.find_by(id: activity.action.followed_id)),class: "badge badge-secondary"%>
                     <% else %>
                         learned <%=activity.action.result%> of <%=activity.action.choices.count%>
                         <%=link_to activity.action.category.title,lesson_path(activity.action),class: "badge badge-primary"%>
