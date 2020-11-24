@@ -17,4 +17,16 @@ class LessonsController < ApplicationController
     
 
   end
+
+  def destroy
+    @lesson = Lesson.find(params[:id])
+    @newlesson = current_user.lessons.new(category_id:@lesson.category_id)
+    if @lesson.destroy
+      flash[:info] = "Deleted the lesson."
+      
+      @newlesson.save
+      redirect_to new_lesson_answer_url(@newlesson)
+      
+    end
+  end
 end

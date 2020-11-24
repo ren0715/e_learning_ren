@@ -24,10 +24,27 @@
                         <div class="mt-3 mb-5">
                             <strong>[<%= pluralize(category.words.count, "word")%>] </strong><span><%=category.description%></span>
                         </div>
-                        <% if category.lessons.find_by(user_id: current_user.id) %>
-                            <div class=""><%= link_to "Show Result",lesson_path(category.lessons.find_by(user_id: current_user.id)),class: "btn btn-outline-secondary w-100"%></div>
+                        
+                        <%#if category.lessons.find_by(user_id: current_user.id).result == nil %>
+                        <% if category.lessons.find_by(user_id: current_user.id) && category.lessons.find_by(user_id: current_user.id).answers.count != category.words.count %>
+                            <div class="row container">
+                                <div class="col-sm-6">
+                                    <%= button_to "Continue",new_lesson_answer_path(lesson_id: category.lessons.find_by(user_id: current_user.id).id),method: :get,class: "btn btn-info text-white w-100"%>
+                                </div>
+                                <div class="col-sm-6">
+                                    <%= button_to "Restart",lesson_path(category.lessons.find_by(user_id: current_user.id)),method: :delete,class: "btn btn-success text-white w-100"%>
+                                </div>
+                            </div>
+                            
+                        <% elsif category.lessons.find_by(user_id: current_user.id) %>
+                            <div class="container">
+                                <%= link_to "Show Result", lesson_path(category.lessons.find_by(user_id: current_user.id)), class: "btn btn-outline-secondary w-100"%>
+                            </div>
+
                         <% else %>
-                            <div class=""><%= button_to "Learn",lessons_path(category_id:category.id),class: "btn btn-primary text-white w-100"%></div>
+                            <div class="container">
+                                <%= button_to "Learn",lessons_path(category_id:category.id),class: "btn btn-primary text-white w-100"%>
+                            </div>
                         <% end %>
                     </div>
                 </div>
