@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="card w-50 mx-auto">
+        <div class="">
+            <%=link_to "Back",user_dashboard_path(@activity.user),class: "text-info h5"%>
+        </div>
+        <div class="card-title h2 text-center mt-5 mb-4">
+            
+            <strong>
+                <% if @activity.user == current_user %>
+                    <%=link_to "You",user_path(@activity.user),class: "text-muted"%>
+                <% else %>
+                    <%=link_to @activity.user.name,user_path(@activity.user),class: "text-muted"%>
+                <% end %>
+            </strong>
+            <span>
+                <% if @activity.action_type == "Relationship" %>
+                    followed
+                    <%=link_to @users.find_by(id: @activity.action.followed_id).name,user_path(@users.find_by(id: @activity.action.followed_id)),class: "badge badge-secondary"%>
+                <% else %>
+                    learned <%=@activity.action.result%> of <%=@activity.action.choices.count%>
+                    <%=link_to @activity.action.category.title,lesson_path(@activity.action),class: "badge badge-primary"%>
+                <% end %>
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <p class="text-center mb-5">This activity has <%= pluralize(@comments.count, "Comment") %>.</p>
+                <% @comments.each do |com| %>
+                    <div class="media mb-4">
+                        <div class="avatarsquare">
+                            <div class="default">
+                                <% if com.user.avatar? %>
+                                    <%= image_tag com.user.avatar.url,style: 'width: 50px; height: 50px;'%>
+                                <%else%>
+                                    <%= image_tag "/assets/11.svg", class: '',style: 'width: 50px; height: 50px;'%>
+                                <%end%>
+                            </div>
+                        </div>
+                        <div class="media-body ml-2 row">
+                            
+                            <div class="col-md-5">
+                            <%=link_to com.user.name,user_path(com.user),class: "text-dark"%>
+                            <div>
+                                    <small class="text-muted"><%= time_ago_in_words(com.created_at) %> ago</small>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                Comment:
+                                <%= com.content %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

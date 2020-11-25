@@ -1,5 +1,11 @@
 class CommentsController < ApplicationController
   
+  def index
+    @users = User.all
+    @activity = Activity.find(params[:activity_id])
+    @comments = Comment.where(activity_id: @activity.id)
+  end
+
   def create
     @comment = current_user.comments.new(comment_params)
 

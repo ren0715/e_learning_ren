@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :activities do
-    resources :comments
+    
     member do
       post 'upvote'
       delete 'downvote'
