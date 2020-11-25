@@ -35,8 +35,22 @@
                         <small class="text-muted"><%= time_ago_in_words(activity.created_at) %></small>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <% if activity.user != current_user %>
+                
+                <% if activity.user != current_user %>
+                    <div class="col-md-2">
+                        <% if activity.votes.find_by(user_id: current_user.id) %>
+                            <%= link_to downvote_activity_path(activity), method: :delete do %>
+                                <%= fa_icon 'heart',class: "text-danger"%>
+                            <% end %>
+                        <% else %>
+                            <%= link_to upvote_activity_path(activity), method: :post do %>
+                                <%= fa_icon 'heart',class: "text-secondary"%>
+                            <% end %>
+                        <% end %>
+
+                        <%= activity.votes.count%>
+                    </div>
+                    <div class="col-md-5">
                         <div class="" id="<%=index%>">
                             <%= form_for :comment do |f|%>
                                 <div class="form-group row">
@@ -51,25 +65,10 @@
                                 
                             <% end %>
                         </div>
-                    <% end %>
-                </div>
-                
-                <% if activity.user != current_user %>
-                    <div class="col-md-2 text-right">
-                        <% if activity.votes.find_by(user_id: current_user.id) %>
-                            <%= link_to downvote_activity_path(activity), method: :delete do %>
-                                <%= fa_icon 'heart',class: "text-danger"%>
-                            <% end %>
-                        <% else %>
-                            <%= link_to upvote_activity_path(activity), method: :post do %>
-                                <%= fa_icon 'heart',class: "text-secondary"%>
-                            <% end %>
-                        <% end %>
-
-                        <%= activity.votes.count%>
                     </div>
+
+                    
                 <% end %>
-                
             </div>
         </div>
     </div>
