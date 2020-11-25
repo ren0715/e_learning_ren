@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :activities do
+    resources :comments
     member do
       post 'upvote'
       delete 'downvote'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   end
   resources :relationships
   resources :words
+
+  
   namespace :admin do
     resources :users do
       member do

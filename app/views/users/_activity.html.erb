@@ -52,11 +52,13 @@
                     </div>
                     <div class="col-md-5">
                         <div class="" id="<%=index%>">
-                            <%= form_for :comment do |f|%>
+                            <%= form_for ([activity, @comment]) do |f|%>
                                 <div class="form-group row">
                                     <div class="">
                                         <%= f.text_area :content, class: 'form-control',placeholder: 'Write your comment.', style: 'height:39px;' %>
                                     </div>
+                                    <%= f.hidden_field :activity_id, value: activity.id%>
+
                                     <div class="ml-2">
                                         <%= f.submit 'Post',class: 'btn btn-primary form-control'%>
                                     </div>
