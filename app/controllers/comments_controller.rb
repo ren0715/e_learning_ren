@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
 
     if @comment.save
       flash[:success] = "Created a comment."
@@ -13,6 +13,6 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:user_id, :activity_id, :content)
+    params.require(:comment).permit(:activity_id, :content)
   end
 end
