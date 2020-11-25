@@ -38,21 +38,28 @@
                 
                 <% if activity.user != current_user %>
                     <div class="col-md-2">
+                        <%= link_to comments_path(activity_id: activity.id) do %>
+                            <%= fa_icon 'comment',class: "text-secondary"%>
+                            <%= activity.comments.count%>
+                        <% end %>
                         <% if activity.votes.find_by(user_id: current_user.id) %>
                             <%= link_to downvote_activity_path(activity), method: :delete do %>
                                 <%= fa_icon 'heart',class: "text-danger"%>
+                                <%= activity.votes.count%>
                             <% end %>
                         <% else %>
                             <%= link_to upvote_activity_path(activity), method: :post do %>
                                 <%= fa_icon 'heart',class: "text-secondary"%>
+                                <%= activity.votes.count%>
                             <% end %>
                         <% end %>
+                        
 
-                        <%= activity.votes.count%>
+                        
                     </div>
                     <div class="col-md-5">
                         <div class="" id="<%=index%>">
-                            <%= form_for ([activity, @comment]) do |f|%>
+                            <%= form_for @comment do |f|%>
                                 <div class="form-group row">
                                     <div class="">
                                         <%= f.text_area :content, class: 'form-control',placeholder: 'Write your comment.', style: 'height:39px;' %>
@@ -69,7 +76,14 @@
                         </div>
                     </div>
 
-                    
+                <% else %>
+                    <%= link_to comments_path(activity_id: activity.id) do %>
+                        <%= fa_icon 'comment',class: "text-secondary"%>
+                        <%= activity.comments.count%>
+                    <% end %>
+                    <div class="col-md-5">
+                        <%= pluralize(activity.votes.count, "user") %> liked
+                    </div>
                 <% end %>
             </div>
         </div>
