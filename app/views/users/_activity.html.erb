@@ -36,21 +36,22 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    
-                    <div class="" id="<%=index%>">
-                        <%= form_for :comment do |f|%>
-                            <div class="form-group row">
-                                <div class="">
-                                    <%= f.text_area :content, class: 'form-control',placeholder: 'Write your comment.' %>
-                                </div>
-                                <div class="">
-                                    <%= f.submit 'Post',class: 'btn btn-primary form-control'%>
+                    <% if activity.user != current_user %>
+                        <div class="" id="<%=index%>">
+                            <%= form_for :comment do |f|%>
+                                <div class="form-group row">
+                                    <div class="">
+                                        <%= f.text_area :content, class: 'form-control',placeholder: 'Write your comment.', style: 'height:39px;' %>
+                                    </div>
+                                    <div class="ml-2">
+                                        <%= f.submit 'Post',class: 'btn btn-primary form-control'%>
+                                    </div>
+                                    
                                 </div>
                                 
-                            </div>
-                            
-                        <% end %>
-                    </div>
+                            <% end %>
+                        </div>
+                    <% end %>
                 </div>
                 
                 <% if activity.user != current_user %>
