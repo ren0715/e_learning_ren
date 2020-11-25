@@ -28,7 +28,7 @@
                             
                             <%#if category.lessons.find_by(user_id: current_user.id).result == nil %>
                             <% if category.lessons.find_by(user_id: current_user.id) && category.lessons.find_by(user_id: current_user.id).answers.count != category.words.count %>
-                                <div class="row container">
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <%= button_to "Continue",new_lesson_answer_path(lesson_id: category.lessons.find_by(user_id: current_user.id).id),method: :get,class: "btn btn-info text-white w-100"%>
                                     </div>
