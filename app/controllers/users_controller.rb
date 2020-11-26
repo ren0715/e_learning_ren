@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     @lessons = @user.lessons.all
     @howmany = 0
     @activities = Activity.where(user_id: @user.id).paginate(page: params[:page], per_page: 10)
+    @comment = Comment.new
   end
 
   def dashboard
