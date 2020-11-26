@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="card w-50 mx-auto">
+    <div class="card w-75 mx-auto">
         <div class="">
-            <%=link_to "Back",user_dashboard_path(@activity.user),class: "text-info h5"%>
+            <%=link_to "Back",user_dashboard_path(current_user),class: "text-info h5"%>
         </div>
         <div class="card-title h2 text-center mt-5 mb-4">
             
@@ -38,15 +38,65 @@
                         </div>
                         <div class="media-body ml-2 row">
                             
-                            <div class="col-md-5">
-                            <%=link_to com.user.name,user_path(com.user),class: "text-dark"%>
-                            <div>
+                            <div class="col-md-3">
+                                <%=link_to com.user.name,user_path(com.user),class: "text-dark"%>
+                                <div>
                                     <small class="text-muted"><%= time_ago_in_words(com.created_at) %> ago</small>
                                 </div>
                             </div>
-                            <div class="col-md-7">
-                                Comment:
+                            <div class="col-md-3">
                                 <%= com.content %>
+                            </div>
+                            <div class="col-md-6">
+                                <% if com.reply %>
+                                    <div class="">
+                                        Reply: from
+                                        <%=link_to @activity.user.name,user_path(@activity.user),class: ""%>
+                                        <%=com.reply.content%>
+                                        <div>
+                                            <small class="text-muted"><%= time_ago_in_words(com.created_at) %> ago</small>
+                                        </div>
+                                    </div>
+                                <% else %>
+                                    <% if current_user == @activity.user%>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                            Comment
+                                        </button>
+                                        <%= form_for @reply do |f|%>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Please write your reply here!</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="">
+                                                                            <%= f.text_area :content, class: 'form-control w-100 mx-auto' %>
+                                                                        </div>
+                                                                        <%= f.hidden_field :comment_id, value: com.id%>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <div class="ml-2">
+                                                                <%= f.submit 'Reply',class: 'btn btn-primary form-control'%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                                
                             </div>
                         </div>
                     </div>

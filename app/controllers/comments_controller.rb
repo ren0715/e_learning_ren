@@ -4,6 +4,8 @@ class CommentsController < ApplicationController
     @users = User.all
     @activity = Activity.find(params[:activity_id])
     @comments = Comment.where(activity_id: @activity.id)
+    @reply = Reply.new
+    @replies = Reply.all
   end
 
   def create
