@@ -54,13 +54,13 @@
                     </div>
                     
                     <div class="col-md-5 text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_<%=activity.id%>">
                         Comment
                         </button>
 
                         <!-- Modal -->
-                        <%= form_for @comment do |f|%>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <%= form_for current_user.comments.new do |f|%>
+                            <div class="modal fade" id="exampleModal_<%=activity.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
