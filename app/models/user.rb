@@ -15,7 +15,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :lessons, dependent: :destroy
   has_many :comments, dependent: :destroy
-
+  has_many :replies
   def follow(other_user)
     Relationship.create(
       follower_id: id,            #current_user.id

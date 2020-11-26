@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_11_26_070723) do
   end
 
   create_table "replies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "comment_id"
     t.text "content"
     t.datetime "created_at", null: false

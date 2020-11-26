@@ -38,21 +38,21 @@
                         </div>
                         <div class="media-body ml-2 row">
                             
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <%=link_to com.user.name,user_path(com.user),class: ""%>
                                 <div>
                                     <small class="text-muted"><%= time_ago_in_words(com.created_at) %> ago</small>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-7 h5">
                                 <%= com.content %>
                             </div>
                             <div class="col-md-2 text-right">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_<%=com.id%>">
                                     Reply
                                 </button>
                                 <%= form_for @reply do |f|%>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal_<%=com.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -86,19 +86,23 @@
                             </div>
                             <% if com.replies %>
                                 <% com.replies.each do |reply|%>
-                                    <div class="col-md-4">
-                                        Reply: from
-                                        <%=link_to @activity.user.name,user_path(@activity.user),class: ""%>
-                                        <div>
-                                            <small class="text-muted"><%= time_ago_in_words(reply.created_at) %> ago</small>
+                                    <div class="bg-light row col-md-12">
+                                        <div class="col-md-4">
+                                            Reply: from
+                                            <%=link_to reply.user.name,user_path(reply.user),class: ""%>
+                                            <div>
+                                                <small class="text-muted"><%= time_ago_in_words(reply.created_at) %> ago</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <%=reply.content%>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <%=reply.content%>
-                                    </div>
+                                    
                                 <% end %>
                             <% end %>
                         </div>
+                        
                     </div>
                 <% end %>
             </div>
