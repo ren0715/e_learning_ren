@@ -9,21 +9,21 @@
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
 
-    <body style="margin-top:72px;">
-    <%= render 'layouts/header' %>
+    <body style="margin-top:72px;" class="footerFixed">
+        <%= render 'layouts/header' %>
 
-    <% if flash.any? %>
-        <% flash.each do |type, msg|%>
-        <div class="container">
-            <div class="alert alert-<%= type %>">
-                <div><%= msg %></div>
+        <% if flash.any? %>
+            <% flash.each do |type, msg|%>
+            <div class="container">
+                <div class="alert alert-<%= type %>">
+                    <div><%= msg %></div>
+                </div>
             </div>
-        </div>
-        
+            
+            <% end %>
         <% end %>
-    <% end %>
 
-    <%= yield %>
-    <%= render 'layouts/footer' %>
+        <%= yield %>
+        <%= render 'layouts/footer' %>
     </body>
 </html>
