@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="card w-50 mx-auto">
+        <div class="">
+            <%=link_to "Back",user_dashboard_path(current_user),class: "text-info h5"%>
+        </div>
+        <div class="card-title h2 text-center mt-5 mb-4">
+            Activity:
+            <strong>
+                <% if @activity.user == current_user %>
+                    <%=link_to "You",user_path(@activity.user),class: "text-muted"%>
+                <% else %>
+                    <%=link_to @activity.user.name,user_path(@activity.user),class: "text-muted"%>
+                <% end %>
+            </strong>
+            <span>
+                <% if @activity.action_type == "Relationship" %>
+                    followed
+                    <%=link_to @users.find_by(id: @activity.action.followed_id).name,user_path(@users.find_by(id: @activity.action.followed_id)),class: "badge badge-secondary"%>
+                <% else %>
+                    learned <%=@activity.action.result%> of <%=@activity.action.choices.count%>
+                    <%=link_to @activity.action.category.title,lesson_path(@activity.action),class: "badge badge-primary"%>
+                <% end %>
+            </span>
+            <div class="h3 mt-5">Liked by</div>
+        </div>
+        <div class="card-body">
+            <% @votes.each do |vote| %>
+                <div class="media mb-4 border-bottom pb-3">
+                    <% if vote.user.avatar? %>
+                        <%= image_tag vote.user.avatar.url, class: 'rounded-circle',style: 'width: 90px;'%>
+                    <%else%>
+                        <%= image_tag "/assets/11.svg", class: '',style: 'width: 90px; height: 90px;'%>
+                    <%end%>
+                    <div class="media-body pt-4">
+                        <span class="h5 pl-3"><%= link_to vote.user.name,user_path(vote.user)%></span>
+                        <div class="float-right">
+                            <% if vote.user != current_user%>
+                                <%=render 'users/follow_button',user: vote.user%>
+                            <%end%>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

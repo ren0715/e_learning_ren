@@ -35,7 +35,7 @@
                 
                 <% if activity.user != current_user %>
 
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <%= link_to comments_path(activity_id: activity.id) do %>
                             <%= fa_icon 'comment',class: "text-secondary"%>
                             <%= activity.comments.count%>
@@ -43,17 +43,21 @@
                         <% if activity.votes.find_by(user_id: current_user.id) %>
                             <%= link_to downvote_activity_path(activity), method: :delete do %>
                                 <%= fa_icon 'heart',class: "text-danger"%>
-                                <%= activity.votes.count%>
+                            <% end %>
+                            <%= link_to votes_index_path(activity_id: activity.id) do %>
+                                <%= pluralize(activity.votes.count, "Like") %>
                             <% end %>
                         <% else %>
                             <%= link_to upvote_activity_path(activity), method: :post do %>
                                 <%= fa_icon 'heart',class: "text-secondary"%>
-                                <%= activity.votes.count%>
+                            <% end %>
+                            <%= link_to votes_index_path(activity_id: activity.id) do %>
+                                <%= pluralize(activity.votes.count, "Like") %>
                             <% end %>
                         <% end %>
                     </div>
                     
-                    <div class="col-md-5 text-right">
+                    <div class="col-md-3 text-right">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_<%=activity.id%>">
                         Comment
                         </button>
@@ -99,8 +103,12 @@
                         <%= fa_icon 'comment',class: "text-secondary"%>
                         <%= activity.comments.count%>
                     <% end %>
+
                     <div class="col-md-5">
-                        <%= pluralize(activity.votes.count, "user") %> liked
+                        <%= link_to votes_index_path(activity_id: activity.id) do %>
+                            <%= pluralize(activity.votes.count, "Like") %>
+                        <% end %>
+                        
                     </div>
                 <% end %>
             </div>

@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
+      flash[:success] = "Your setting has been updated."
       redirect_to root_url
     else
       render 'edit'
