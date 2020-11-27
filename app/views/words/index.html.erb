@@ -22,9 +22,14 @@
                     </span>
                     
                     <%if !@cate %>
-                        <strong class="float-right h3"><span class="lead">Category: </span>All Categories</strong>
+                        <strong class="float-right h3"><span class="h5">Category: </span>All Categories</strong>
                     <%else%>
-                        <strong class="float-right h3"><span class="lead">Category: </span><%= @cate %></strong>
+                        <%if !@lessons.any? %>
+                            <strong class="float-right h3"><span class="h5">You haven't learned this category: </span><%= @cate %></strong>
+                        <%else%>
+                            <strong class="float-right h3"><span class="h5">Category: </span><%= @cate %></strong>
+                        <%end%>
+                        
                     <%end%>
                     <table class="table">
                         <tr>
