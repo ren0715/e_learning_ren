@@ -3,7 +3,7 @@ class Admin::WordsController < ApplicationController
   
   def index
     @category = Category.find(params[:category_id])
-    @words = Word.where(category_id: params[:category_id]).paginate(page: params[:page], per_page: 4)
+    @words = Word.where(category_id: params[:category_id]).paginate(page: params[:page], per_page: 10)
   end
 
   def new
