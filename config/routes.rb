@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'votes/index'
   resources :replies
   resources :comments
   resources :activities do
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users do
     get 'dashboard'
+    get 'liked_by'
     member do
       get 'following'
       get 'followers' 
