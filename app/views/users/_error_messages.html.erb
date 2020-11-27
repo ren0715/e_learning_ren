@@ -1,8 +1,8 @@
-<% if @user.errors.any? %>
+<% if para.errors.any? %>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong><%= pluralize(@user.errors.count, "error") %></strong> 
+        <strong><%= pluralize(para.errors.count, "error") %></strong> 
         <ul>
-        <% @user.errors.full_messages.each do |msg| %>
+        <% para.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
         <% end %>
         </ul>

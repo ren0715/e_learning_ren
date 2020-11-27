@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="card w-75 mx-auto">
+    <div class="card  mx-auto">
         <div class="">
             <%=link_to "Back",user_dashboard_path(current_user),class: "text-info h5"%>
         </div>
@@ -84,9 +84,14 @@
                                     </div>
                                 <% end %>
                             </div>
-                            <% if com.replies %>
-                                <% com.replies.each do |reply|%>
-                                    <div class="bg-light row col-md-12">
+                            <% if com.replies.count > 0 %>
+                                <p class="col-12">
+                                    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample_<%=com.id%>" aria-expanded="false" aria-controls="collapseExample">
+                                        View <%= pluralize(com.replies.count, "Reply") %>
+                                    </button>
+                                </p>
+                                <div class="collapse bg-light row col-md-12" id="collapseExample_<%=com.id%>">
+                                    <% com.replies.each do |reply|%>
                                         <div class="col-md-4">
                                             Reply: from
                                             <%=link_to reply.user.name,user_path(reply.user),class: ""%>
@@ -94,12 +99,12 @@
                                                 <small class="text-muted"><%= time_ago_in_words(reply.created_at) %> ago</small>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <%=reply.content%>
                                         </div>
-                                    </div>
-                                    
-                                <% end %>
+                                        
+                                    <% end %>
+                                </div>
                             <% end %>
                         </div>
                         
