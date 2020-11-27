@@ -16,6 +16,9 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: e_learning_ren_production
   username: e_learning_ren
   password: <%= ENV['E_LEARNING_REN_DATABASE_PASSWORD'] %>
