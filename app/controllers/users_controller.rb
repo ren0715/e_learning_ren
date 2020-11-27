@@ -49,6 +49,7 @@ class UsersController < ApplicationController
     @lessons = current_user.lessons.all
     @howmany = 0
     @activities = @user.feed.paginate(page: params[:page], per_page: 10)
+    @comment = Comment.new
   end
 
   def following

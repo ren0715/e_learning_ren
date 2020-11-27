@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       flash[:success] = "Created a comment."
       redirect_to request.referrer
     else
-      render 'dashboard'
+      redirect_to request.referrer
     end
   end
 

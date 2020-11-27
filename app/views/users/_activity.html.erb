@@ -59,7 +59,8 @@
                         </button>
 
                         <!-- Modal -->
-                        <%= form_for current_user.comments.new do |f|%>
+                        <%= form_for @comment do |f|%>
+                            
                             <div class="modal fade" id="exampleModal_<%=activity.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

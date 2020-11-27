@@ -1,5 +1,5 @@
 <%= form_for(@user) do |f| %>
-    <%= render 'error_messages'%>
+    <%= render 'error_messages',para: @user%>
     <div class="form-group">
         <%= f.label :name %><br>
         <%= f.text_field :name, class: 'form-control' %>

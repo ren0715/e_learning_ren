@@ -6,7 +6,7 @@ class RepliesController < ApplicationController
       flash[:success] = "Created a reply."
       redirect_to request.referrer
     else
-      render 'dashboard'
+      redirect_to request.referrer
     end
   end
 
